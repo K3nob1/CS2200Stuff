@@ -1,0 +1,8 @@
+<Microcode>
+	<State name="DUMMY">
+		<Signal name = "DrReg"/>
+		<Signal name = "DrPC"/>
+		<Goto state="STATE1"/>
+	</State>
+
+</Microcode>
