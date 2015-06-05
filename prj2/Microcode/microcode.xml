@@ -1,23 +1,67 @@
 <Microcode>
 <!--FetchMacroState -->
+
+	
 	<State name="FETCH0" onZ="false">
+		<Signal name="chkZ"/>
+		<Signal name="OPTest"/>
+	</State>
+
+	<State name="FETCH1" onInt="false">
 		<Signal name="DrPC"/>
 		<Signal name="LdA"/>
 		<Signal name="LdMAR"/>
-		<Goto state="FETCH1"/>
-	</State>
-	<State name="FETCH1">
-		<Signal name="DrMEM"/>
-		<Signal name="LdIR"/>
 		<Goto state="FETCH2"/>
 	</State>
 	<State name="FETCH2">
+		<Signal name="DrMEM"/>
+		<Signal name="LdIR"/>
+		<Goto state="FETCH3"/>
+	</State>
+	<State name="FETCH3">
 		<Signal name="ALULo"/>
 		<Signal name="ALUHi"/>
 		<Signal name="DrALU"/>
 		<Signal name="LdPC"/>
 		<Signal name="OPTest"/>
 	</State>
+	<State name="FETCH4" onInt="true">
+		<Signal name="RegSelLo"/>
+		<Signal name="RegSelHi"/>
+		<Signal name="DrPC"/>
+		<Signal name="WrREG"/>
+		<Signal name="LdEnInt"/>
+		<Goto state="FETCH5"/>
+	</State>
+	<State name="FETCH5">
+		<Signal name="IntAck"/>
+		<Signal name="LdMAR"/>
+		<Goto state="FETCH6"/>
+	</State>
+	<State name="FETCH6">
+		<Signal name="DrMEM"/>
+		<Signal name="LdPC"/>
+		<Goto state="FETCH1"/>
+	</State>
+	<State name="EI0">
+		<Signal name="DrEnInt"/>
+		<Signal name="LdEnInt"/>
+		<Goto state="FETCH0"/>
+	</State>
+	<State name="DI0">
+		<Signal name="LdEnInt"/>
+		<Goto state="FETCH0"/>
+	</State>
+	<State name="RETI0">
+		<Signal name="RegSelLo"/>
+		<Signal name="RegSelHi"/>
+		<Signal name="DrReg"/>
+		<Signal name="LdPC"/>
+		<Signal name="DrEnInt"/>
+		<Signal name="LdEnInt"/>
+		<Goto state="FETCH0"/>
+	</State>
+
 <!--Add(0000)-->
 	<State name="ADD0">
 		<Signal name="LdA"/>
